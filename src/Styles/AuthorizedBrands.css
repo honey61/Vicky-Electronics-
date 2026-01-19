@@ -1,0 +1,112 @@
+/* ================= AUTHORIZED BRANDS ================= */
+
+.brands-section {
+  padding: 100px 120px;
+  background: #ffffff;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.brands-container {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+/* HEADER */
+.brands-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: #f0f0f0;
+  font-size: 12px;
+  margin-bottom: 14px;
+}
+
+.brands-header h2 {
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+.brands-header h2 span {
+  color: #1e7cf2;
+}
+
+.brands-header p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 50px;
+}
+
+/* MARQUEE ROW */
+.brands-marquee {
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 28px;
+}
+
+.brands-track {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+  will-change: transform;
+}
+
+/* LOGO */
+/* LOGO CONTAINER — SAME SIZE FOR ALL */
+.brand-logo {
+  min-width: 140px;
+  height: 80px;               /* 🔑 fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* LOGO IMAGE — SCALE INSIDE BOX */
+.brand-logo img {
+  max-height: 55px;           /* 🔑 uniform logo height */
+  max-width: 120px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.brands-marquee {
+  overflow: hidden;
+  background: #ffffff; /* prevents black flash */
+}
+
+
+
+/* FOOTER */
+.brands-footer {
+  margin-top: 30px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 992px) {
+  .brands-section {
+    padding: 80px 40px;
+  }
+}
+
+@media (max-width: 576px) {
+  .brands-section {
+    padding: 60px 20px;
+  }
+
+  .brands-header h2 {
+    font-size: 30px;
+  }
+
+  .brand-logo {
+    min-width: 100px;
+  }
+
+  .brand-logo img {
+    max-width: 90px;
+    max-height: 45px;
+  }
+}

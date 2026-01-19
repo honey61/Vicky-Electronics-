@@ -1,0 +1,141 @@
+/* ================= NAVBAR ================= */
+
+.top-nav {
+  position: fixed;
+  top: 30px;
+  left: 40px;
+  right: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 20;
+  transition: all 0.3s ease;
+}
+
+/* GLASS EFFECT ON SCROLL */
+.top-nav.scrolled {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  padding: 12px 20px;
+}
+
+/* LOGO */
+.logo {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo span {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.logo small {
+  display: block;
+  font-size: 11px;
+  color: #555;
+}
+
+/* DESKTOP MENU */
+.desktop-menu {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  font-size: 14px;
+}
+
+.desktop-menu li {
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 22px;
+  height: 2px;
+  background: #111;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+  .top-nav {
+    top: 20px;
+    left: 20px;
+    right: 20px;
+  }
+
+  .desktop-menu {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* ================= MOBILE MENU ================= */
+
+.mobile-menu {
+  position: fixed;
+  top: 80px; /* SAME AS NAVBAR HEIGHT AREA */
+  left: 5%;
+  width: 90%;
+  height: calc(50vh - 80px);
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 100;
+  padding: 20px;
+}
+
+/* HEADER */
+.mobile-menu-header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.mobile-menu-header h3 {
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  position: absolute;
+  right: 20px;
+  top: 0;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* MENU ITEMS */
+.mobile-menu ul {
+  list-style: none;
+  text-align: center;
+}
+
+.mobile-menu li {
+  font-size: 22px;
+  margin: 22px 0;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}

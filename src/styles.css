@@ -1,0 +1,7 @@
+body{margin:0;font-family:Segoe UI;}
+.navbar{display:flex;justify-content:space-between;padding:20px;position:absolute;width:100%;}
+.hero{height:100vh;background:#ddd;display:flex;align-items:center;padding:40px;}
+
+
+
+.foqoter{text-align:center;padding:20px;background:#111;color:white;}
