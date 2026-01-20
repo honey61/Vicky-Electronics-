@@ -158,7 +158,7 @@ function Navbar() {
       transition={{ duration: 0.35, ease: "easeOut" }}
     >
       <ul>
-        <li onClick={() => handleNav("/")}>Work</li>
+        <li onClick={() => handleNav("/Vicky-Electronics-")}>Work</li>
         <li onClick={() => handleNav("/about")}>About</li>
         <li onClick={() => handleNav("/electricians")}>Electricians</li>
         <li onClick={() => handleNav("/contact")}>Contact</li>
