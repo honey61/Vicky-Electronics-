@@ -1,6 +1,7 @@
 {
     
     "name": "vicky-electronics",
+      "homepage": "https://honey61.github.io/Vicky-Electronics-",
     "version": "0.1.0",
     "private": true,
     "dependencies": {

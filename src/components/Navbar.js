@@ -107,7 +107,7 @@ function Navbar() {
       {/* ================= TOP NAV ================= */}
       <div className={`top-nav ${scrolled ? "scrolled" : ""}`}>
         {/* LOGO */}
-        <div className="logo" onClick={() => navigate("/")}>
+        <div className="logo" onClick={() => navigate("/Vicky-Electronics-")}>
           <motion.span
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}

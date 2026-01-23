@@ -21,6 +21,7 @@ function App() {
         <Route path="/electricians" element={<Electricians />} />
            <Route path="/product" element={<Products />} />
       </Routes>
+
       <Footer />
     </Router>
   );
