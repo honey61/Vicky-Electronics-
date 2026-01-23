@@ -7,6 +7,7 @@ import HomePage from "./components/Pages/HomePage";
 import ContactOsome from "./components/Pages/Contact"; // your contact page
 // import About from "./components/Pages/About"; // optional later
 import Electricians from "./components/Pages/Electricians";
+import Products from "./components/Pages/Products";
 
 function App() {
   return (
@@ -14,10 +15,11 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/Vicky-Electronics-" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/contact" element={<ContactOsome />} />
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/electricians" element={<Electricians />} />
+           <Route path="/product" element={<Products />} />
       </Routes>
 
       <Footer />

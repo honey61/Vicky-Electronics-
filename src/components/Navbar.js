@@ -126,7 +126,7 @@ function Navbar() {
 
         {/* DESKTOP MENU */}
         <ul className="desktop-menu">
-          <li onClick={() => navigate("/")}>Work</li>
+     <li onClick={() => handleNav("/product")}>Product</li>
           <li onClick={() => navigate("/about")}>About</li>
           <li onClick={() => navigate("/electricians")}>Electricians</li>
           <li onClick={() => navigate("/contact")}>Contact</li>
@@ -158,7 +158,7 @@ function Navbar() {
       transition={{ duration: 0.35, ease: "easeOut" }}
     >
       <ul>
-        <li onClick={() => handleNav("/Vicky-Electronics-")}>Work</li>
+        <li onClick={() => handleNav("/product")}>Product</li>
         <li onClick={() => handleNav("/about")}>About</li>
         <li onClick={() => handleNav("/electricians")}>Electricians</li>
         <li onClick={() => handleNav("/contact")}>Contact</li>
