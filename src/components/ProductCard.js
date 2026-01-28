@@ -18,24 +18,68 @@ export default function ProductCard({
   price,
   unit,
   rating,
-  reviews
+  reviews,
+  discount,
+  mrp
 }) {
   return (
-    <motion.div className="product-card" variants={fadeUp}>
-      <div className="product-image">
-        <img src={image} alt={title} />
-      </div>
+    <motion.div
+  className="product-card"
+  variants={fadeUp}
+  whileHover={{
+    y: -8,
+    scale: 1.02,
+    boxShadow: "0 12px 30px rgba(0,0,0,0.12)"
+  }}
+  transition={{ type: "spring", stiffness: 260, damping: 20 }}
+>
+
+     <div className="product-image">
+  <motion.img
+    src={image}
+    alt={title}
+    whileHover={{ scale: 1.08 }}
+    transition={{ duration: 0.4, ease: "easeOut" }}
+  />
+</div>
+
 
       <div className="product-info">
         <h3>{title}</h3>
         <p>{description}</p>
 
-        <div className="product-price">
-          <strong>₹{price}</strong>
-          <span>/{unit}</span>
-        </div>
+       {/* PRICE SECTION */}
+<div className="product-price">
+  {/* MRP + Discount (top) */}
+  {mrp && (
+    <div className="mrp-row">
+      <span className="mrp-label">MRP</span>
+      <span className="mrp-value">₹{mrp}</span>
 
-        <button className="product-btn">View Details</button>
+      {discount && discount > 0 && (
+        <span className="discount-badge">
+          {discount}% OFF
+        </span>
+      )}
+    </div>
+  )}
+
+  {/* Final Price (CENTER & BIG) */}
+  <div className="price-row price-center">
+    <span className="price-value">₹{price}</span>
+  </div>
+</div>
+
+
+
+       <motion.button
+  className="product-btn"
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+>
+  View Details
+</motion.button>
+
 
         <div className="product-rating">
           <FaStar className="star" />
