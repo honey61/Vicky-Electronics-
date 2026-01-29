@@ -120,13 +120,15 @@ export default function Contact() {
 
           <motion.div className="address-card" variants={fadeUp}>
             <h4>Address</h4>
-            <p>77 Robinson Road #33-01</p>
+            <p>Doiwala chowk , Rishikesh Road <br /> Dehradun, Uttarakhand - 248140
+
+            </p>
 
             <h4>Email</h4>
-            <p>hi@osome.com</p>
+            <p>vickyelectronics812@gmail.com</p>
 
             <h4>Phone</h4>
-            <p>+65 6232 6932</p>
+            <p>8126246330</p>
 
             <div className="socials">
               <span>f</span>

@@ -8,10 +8,11 @@ import ContactOsome from "./components/Pages/Contact"; // your contact page
 // import About from "./components/Pages/About"; // optional later
 import Electricians from "./components/Pages/Electricians";
 import Products from "./components/Pages/Products";
-
+import ScrollToTop from "./components/ScrollToTop";
 function App() {
   return (
     <Router>
+       <ScrollToTop />
       <Navbar />
 
       <Routes>
