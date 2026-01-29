@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Vicky-Electronics-/static/css/main.3a6fb2af.css",
-    "main.js": "/Vicky-Electronics-/static/js/main.e7420641.js",
+    "main.css": "/Vicky-Electronics-/static/css/main.4e400b87.css",
+    "main.js": "/Vicky-Electronics-/static/js/main.2d9ba6ec.js",
     "static/media/bgimage.avif": "/Vicky-Electronics-/static/media/bgimage.6637c85e39593ebf5211.avif",
     "index.html": "/Vicky-Electronics-/index.html",
-    "main.3a6fb2af.css.map": "/Vicky-Electronics-/static/css/main.3a6fb2af.css.map",
-    "main.e7420641.js.map": "/Vicky-Electronics-/static/js/main.e7420641.js.map"
+    "main.4e400b87.css.map": "/Vicky-Electronics-/static/css/main.4e400b87.css.map",
+    "main.2d9ba6ec.js.map": "/Vicky-Electronics-/static/js/main.2d9ba6ec.js.map"
   },
   "entrypoints": [
-    "static/css/main.3a6fb2af.css",
-    "static/js/main.e7420641.js"
+    "static/css/main.4e400b87.css",
+    "static/js/main.2d9ba6ec.js"
   ]
 }
