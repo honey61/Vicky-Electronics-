@@ -1,152 +1,38 @@
 
-
-
-// import "../Styles/Electricians.css";
-// import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
-// import { motion } from "framer-motion";
-
-// const cardAnim = {
-//   hidden: { opacity: 0, y: 40 },
-//   visible: {
-//     opacity: 1,
-//     y: 0,
-//     transition: { duration: 0.5, ease: "easeOut" }
-//   }
-// };
-
-// const electricians = [
-//   {
-//     name: "Ramesh Kumar",
-//     experience: "12 Years",
-//     expertise: "Residential & Commercial Wiring",
-//     phone: "+919876543210",
-//     image: "/electricians/e1.jpg"
-//   },
-//   {
-//     name: "Amit Sharma",
-//     experience: "8 Years",
-//     expertise: "Industrial Electricals",
-//     phone: "+919812345678",
-//     image: "/electricians/e2.jpg"
-//   },
-//   {
-//     name: "Suresh Verma",
-//     experience: "15 Years",
-//     expertise: "Panel & Maintenance",
-//     phone: "+919899887766",
-//     image: "/electricians/e3.jpg"
-//   },
-//   {
-//     name: "Rahul Singh",
-//     experience: "6 Years",
-//     expertise: "Home Automation",
-//     phone: "+919911223344",
-//     image: "/electricians/e4.jpg"
-//   }
-// ];
-
-// export default function Electricians() {
-//   return (
-//     <section className="electricians-page">
-//       <motion.h1
-//         initial={{ opacity: 0, y: 30 }}
-//         animate={{ opacity: 1, y: 0 }}
-//       >
-//         Our Electricians
-//       </motion.h1>
-
-//       <motion.div
-//         className="electricians-grid"
-//         initial="hidden"
-//         whileInView="visible"
-//         viewport={{ once: true }}
-//       >
-//         {electricians.map((e, i) => (
-//           <motion.div
-//             className="electrician-card"
-//             variants={cardAnim}
-//             whileHover={{ y: -6, scale: 1.02 }}
-//             key={i}
-//           >
-//             {/* IMAGE */}
-//             <div className="avatar">
-//               <img src={e.image} alt={e.name} />
-//             </div>
-
-//             <h3>{e.name}</h3>
-//             <p><strong>Experience:</strong> {e.experience}</p>
-//             <p><strong>Expertise:</strong> {e.expertise}</p>
-//             <p className="phone">{e.phone}</p>
-
-//             {/* ACTIONS */}
-//             <div className="card-actions">
-//               <a href={`tel:${e.phone}`} className="call-btn">
-//                 <FaPhoneAlt /> Call
-//               </a>
-
-//               <a
-//                 href={`https://wa.me/${e.phone.replace("+", "")}`}
-//                 target="_blank"
-//                 rel="noreferrer"
-//                 className="whatsapp-btn"
-//               >
-//                 <FaWhatsapp /> WhatsApp
-//               </a>
-//             </div>
-//           </motion.div>
-//         ))}
-//       </motion.div>
-//     </section>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "../../Styles/PagesStyle/Electricians.css";
 import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const electricians = [
-  {
-    name: "Ramesh Kumar",
-    experience: "12 Years",
-    expertise: "Residential & Commercial Wiring",
-    phone: "+919876543210"
-  },
-  {
-    name: "Amit Sharma",
-    experience: "8 Years",
-    expertise: "Industrial Electricals",
-    phone: "+919812345678"
-  },
-  {
-    name: "Suresh Verma",
-    experience: "15 Years",
-    expertise: "Panel & Maintenance",
-    phone: "+919899887766"
-  },
-  {
-    name: "Rahul Singh",
-    experience: "6 Years",
-    expertise: "Home Automation",
-    phone: "+919911223344"
-  }
-];
+/* Default electrician image */
+const DEFAULT_ELECTRICIAN_IMG =
+  "https://media.istockphoto.com/id/663984670/vector/electrician.jpg?s=2048x2048&w=is&k=20&c=IGFnc1ueeTEc86OHvs8dYd2Q7-ThUbufBodon_OcGWQ=";
 
- function Electricians() {
+function Electricians() {
+  const [electricians, setElectricians] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchElectricians();
+  }, []);
+
+  const fetchElectricians = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/api/electricians");
+
+      const activeElectricians = res.data.filter(
+        (e) => e.status === "Active"
+      );
+
+      setElectricians(activeElectricians);
+    } catch (err) {
+      console.error("Error fetching electricians:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className="electricians-page">
       <motion.h1
@@ -156,21 +42,51 @@ const electricians = [
         Our Electricians
       </motion.h1>
 
+      {loading && <p className="loading-text">Loading electricians...</p>}
+
+      {!loading && electricians.length === 0 && (
+        <p className="no-electricians">No electricians available</p>
+      )}
+
       <div className="electricians-grid">
         {electricians.map((e, i) => (
           <motion.div
             className="electrician-card"
-            key={i}
+            key={e._id}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
           >
+
+            {/* IMAGE */}
+            <div className="electrician-image">
+              <img
+                src={e.image || DEFAULT_ELECTRICIAN_IMG}
+                alt={e.name}
+              />
+            </div>
+
+            {/* INFO */}
             <h3>{e.name}</h3>
 
-            <p><strong>Experience:</strong> {e.experience}</p>
-            <p><strong>Expertise:</strong> {e.expertise}</p>
-            <p className="phone">{e.phone}</p>
+            <p>
+              <strong>Experience:</strong>{" "}
+              {e.experience ? `${e.experience} Years` : "—"}
+            </p>
 
+            <p>
+              <strong>Expertise:</strong>{" "}
+              {e.specialization || "General Electrical"}
+            </p>
+            <p>
+              <strong>Location:</strong>{" "}
+              {e.area || "General Electrical"}
+            </p>
+
+            <p className="phone"> Call : {e.phone}</p>
+
+            {/* ACTIONS */}
             <div className="card-actions">
               <a href={`tel:${e.phone}`} className="call-btn">
                 <FaPhoneAlt /> Call
