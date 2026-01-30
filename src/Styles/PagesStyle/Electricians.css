@@ -1,26 +1,55 @@
-/* ================= PAGE ================= */
+/* ================= ELECTRICIANS PAGE ================= */
+
 .electricians-page {
-  padding: 60px 40px;
-  background: #f6f8fc;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(180deg, #f8fffb, #ffffff);
+  color: #0f172a;
 }
 
-.electricians-page h1 {
+/* ================= HERO ================= */
+
+.electricians-hero {
   text-align: center;
-  margin-bottom: 40px;
-  color: #1f2937;
+  padding: 90px 20px;
+  background: linear-gradient(135deg, #0ea5e9, #22c55e);
+  color: #ffffff;
 }
 
-/* ================= GRID ================= */
+.electricians-hero h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.electricians-hero p {
+  font-size: 17px;
+  max-width: 700px;
+  margin: auto;
+  line-height: 1.7;
+  opacity: 0.95;
+}
+
+/* ================= CONTENT ================= */
+
+.electricians-content {
+  padding: 70px 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ================= GRID (LOCKED ROW COUNT) ================= */
+
 .electricians-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr); /* ✅ Desktop: 4 per row */
   gap: 24px;
 }
 
 /* ================= CARD ================= */
+
 .electrician-card {
   background: #ffffff;
-  border-radius: 14px;
+  border-radius: 18px;
   padding: 22px;
   text-align: center;
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
@@ -31,6 +60,24 @@
   transform: translateY(-6px);
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
 }
+
+/* ================= IMAGE ================= */
+
+.electrician-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.electrician-image img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #22c55e;
+}
+
+/* ================= TEXT ================= */
 
 .electrician-card h3 {
   margin: 12px 0 6px;
@@ -46,26 +93,12 @@
 
 .phone {
   font-weight: 600;
-  color: #004aad;
+  color: #0f172a;
   margin-top: 6px;
 }
 
-/* ================= IMAGE ================= */
-.electrician-image {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
-.electrician-image img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #004aad;
-}
-
 /* ================= ACTIONS ================= */
+
 .card-actions {
   display: flex;
   gap: 12px;
@@ -83,28 +116,28 @@
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
+  color: #ffffff;
   transition: background 0.25s ease;
 }
 
 .call-btn {
-  background: #004aad;
-  color: white;
+  background: #2563eb;
 }
 
 .call-btn:hover {
-  background: #00348a;
+  background: #1e40af;
 }
 
 .whatsapp-btn {
-  background: #25d366;
-  color: white;
+  background: #22c55e;
 }
 
 .whatsapp-btn:hover {
-  background: #1ebe5d;
+  background: #16a34a;
 }
 
 /* ================= STATES ================= */
+
 .loading-text,
 .no-electricians {
   text-align: center;
@@ -112,17 +145,34 @@
   color: #6b7280;
 }
 
-/* ================= RESPONSIVE ================= */
+/* ================= RESPONSIVE (EXACT AS OLD CSS) ================= */
 
-/* Mobile */
-/* 📱 Mobile (2 cards per row) */
+/* 💻 Small Laptop – 3 per row */
+@media (max-width: 1200px) {
+  .electricians-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 📱 Tablet – 2 per row */
+@media (max-width: 900px) {
+  .electricians-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 📱 Mobile – 2 per row (LOCKED) */
 @media (max-width: 600px) {
-  .electricians-page {
-    padding: 24px 12px;
+  .electricians-content {
+    padding: 40px 12px;
+  }
+
+  .electricians-hero h1 {
+    font-size: 32px;
   }
 
   .electricians-grid {
-    grid-template-columns: repeat(2, 1fr); /* ✅ 2 electricians per row */
+    grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
 
@@ -154,18 +204,5 @@
     justify-content: center;
     font-size: 0.8rem;
     padding: 6px 10px;
-  }
-}
-/* Tablet */
-@media (min-width: 601px) and (max-width: 900px) {
-  .electricians-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Small Laptop */
-@media (min-width: 901px) and (max-width: 1200px) {
-  .electricians-grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 }

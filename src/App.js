@@ -9,10 +9,12 @@ import ContactOsome from "./components/Pages/Contact"; // your contact page
 import Electricians from "./components/Pages/Electricians";
 import Products from "./components/Pages/Products";
 import ScrollToTop from "./components/ScrollToTop";
+import Chatbot from "./components/Pages/Chatbot";
 function App() {
   return (
     <Router>
        <ScrollToTop />
+        <Chatbot />
       <Navbar />
 
       <Routes>

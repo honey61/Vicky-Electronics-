@@ -1,20 +1,83 @@
 import "../../Styles/PagesStyle/AboutUsPage.css";
+import { motion } from "framer-motion";
+const journeyData = [
+  {
+    year: "1980",
+    title: "Founded",
+    text: "Vicky Electronics was founded with a vision of trust and quality.",
+    color: "journey-blue"
+  },
+  {
+    year: "2000",
+    title: "Service Expansion",
+    text: "Expanded repair and service offerings for electronics and appliances.",
+    color: "journey-green"
+  },
+  {
+    year: "2000",
+    title: "Customer Trust",
+    text: "Built a strong and loyal customer base through honest service.",
+    color: "journey-purple"
+  },
+  {
+    year: "2001",
+    title: "Growth & Excellence",
+    text: "Continuing the journey with quality, innovation, and trust.",
+    color: "journey-orange"
+  }
+];
+/* Reusable animation variants */
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 }
+};
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 }
+};
 
 export default function AboutUsPage() {
   return (
     <div className="about-page">
 
       {/* HERO */}
-      <section className="about-hero">
-        <h1>About Vicky Electronics</h1>
-        <p>
-          Trusted electronics store delivering quality products, reliable repairs,
-          and honest service.
-        </p>
-      </section>
+    <motion.section
+  className="about-hero"
+  initial={{ opacity: 0, y: 40 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{
+    duration: 0.8,
+    ease: "easeOut"
+  }}
+>
+  <motion.h1
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.2, duration: 0.6 }}
+  >
+    About Vicky Electronics
+  </motion.h1>
+
+  <motion.p
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.35, duration: 0.6 }}
+  >
+    Trusted electronics store delivering quality products, reliable repairs,
+    and honest service.
+  </motion.p>
+</motion.section>
 
       {/* WHO WE ARE */}
-      <section className="about-section">
+      <motion.section
+        className="about-section"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
         <h2>Who We Are</h2>
         <p>
           <strong>Vicky Electronics</strong> is a trusted local electronics store
@@ -22,38 +85,55 @@ export default function AboutUsPage() {
           excellent customer support. We believe in long-term relationships built
           on trust and transparency.
         </p>
-      </section>
+      </motion.section>
 
       {/* SERVICES */}
-      <section className="about-services">
-        <h2>What We Do</h2>
+      <motion.section
+        className="about-services"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ staggerChildren: 0.2 }}
+      >
+        <motion.h2 variants={fadeUp}>What We Do</motion.h2>
 
         <div className="services-grid">
-          <div className="service-card">
-            <h3>Electronics Sales</h3>
-            <p>
-              Wide range of branded electronics, accessories, and home appliances.
-            </p>
-          </div>
-
-          <div className="service-card">
-            <h3>Repair Services</h3>
-            <p>
-              Professional repair services for mobiles, appliances, and electronics.
-            </p>
-          </div>
-
-          <div className="service-card">
-            <h3>Customer Support</h3>
-            <p>
-              Friendly guidance, after-sales support, and transparent pricing.
-            </p>
-          </div>
+          {[
+            {
+              title: "Electronics Sales",
+              text: "Wide range of branded electronics, accessories, and home appliances."
+            },
+            {
+              title: "Repair Services",
+              text: "Professional repair services for mobiles, appliances, and electronics."
+            },
+            {
+              title: "Customer Support",
+              text: "Friendly guidance, after-sales support, and transparent pricing."
+            }
+          ].map((service, index) => (
+            <motion.div
+              key={index}
+              className="service-card"
+              variants={fadeUp}
+              whileHover={{ scale: 1.05 }}
+            >
+              <h3>{service.title}</h3>
+              <p>{service.text}</p>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* WHY CHOOSE US */}
-      <section className="about-why">
+      <motion.section
+        className="about-why"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
         <h2>Why Choose Us</h2>
         <ul>
           <li>✔ Trusted local store with years of experience</li>
@@ -61,62 +141,104 @@ export default function AboutUsPage() {
           <li>✔ Skilled technicians & fast service</li>
           <li>✔ Customer-first approach</li>
         </ul>
-      </section>
+      </motion.section>
 
       {/* MISSION & VISION */}
       <section className="about-mission">
-        <div className="mission-box">
+        <motion.div
+          className="mission-box"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <h3>Our Mission</h3>
           <p>
             To deliver reliable electronics and repair services while maintaining
             the highest standards of honesty and quality.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="vision-box">
+        <motion.div
+          className="vision-box"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           <h3>Our Vision</h3>
           <p>
             To become the most trusted electronics partner in the region through
             service excellence and customer satisfaction.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* JOURNEY */}
-      <section className="about-journey">
-        <h2>Our Journey</h2>
-        <ul>
-          <li><strong>1980</strong> – Vicky Electronics was founded</li>
-          <li><strong>2000</strong> – Expanded repair & service offerings</li>
-          <li><strong>2000</strong> – Built a strong loyal customer base</li>
-          <li><strong>2001</strong> – Serving with trust & quality</li>
-        </ul>
-      </section>
+     {/* JOURNEY */}
+<motion.section
+  className="about-journey"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+>
+  <motion.h2
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+  >
+    Our Journey
+  </motion.h2>
 
+  <div className="journey-grid">
+    {journeyData.map((item, index) => (
+      <motion.div
+        key={index}
+        className={`journey-card ${item.color}`}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: index * 0.2 }}
+        whileHover={{ scale: 1.05 }}
+        viewport={{ once: true }}
+      >
+        <span className="journey-year">{item.year}</span>
+        <h4>{item.title}</h4>
+        <p>{item.text}</p>
+      </motion.div>
+    ))}
+  </div>
+</motion.section>
       {/* TEAM */}
-      <section className="about-team">
-        <h2>Meet Our Team</h2>
+      <motion.section
+        className="about-team"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ staggerChildren: 0.2 }}
+      >
+        <motion.h2 variants={fadeUp}>Meet Our Team</motion.h2>
 
         <div className="team-grid">
-          <div className="team-card">
-            <div className="avatar"></div>
-            <h4>Vicky</h4>
-            <p>Founder</p>
-          </div>
-
-          <div className="team-card">
-            <div className="avatar"></div>
-            <h4>Anjali</h4>
-            <p>Lead Technician</p>
-          </div>
-
-          <div className="team-card">
-            <div className="avatar"></div>
-            <h4>Rohan</h4>
-            <p>Service Manager</p>
-          </div>
+          {[
+            { name: "Vicky", role: "Founder" },
+            { name: "Anjali", role: "Lead Technician" },
+            { name: "Rohan", role: "Service Manager" }
+          ].map((member, index) => (
+            <motion.div
+              key={index}
+              className="team-card"
+              variants={fadeUp}
+              whileHover={{ y: -10 }}
+            >
+              <div className="avatar"></div>
+              <h4>{member.name}</h4>
+              <p>{member.role}</p>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </motion.section>
 
     </div>
   );

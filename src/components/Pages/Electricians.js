@@ -1,11 +1,9 @@
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "../../Styles/PagesStyle/Electricians.css";
 import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-/* Default electrician image */
 const DEFAULT_ELECTRICIAN_IMG =
   "https://media.istockphoto.com/id/663984670/vector/electrician.jpg?s=2048x2048&w=is&k=20&c=IGFnc1ueeTEc86OHvs8dYd2Q7-ThUbufBodon_OcGWQ=";
 
@@ -20,11 +18,9 @@ function Electricians() {
   const fetchElectricians = async () => {
     try {
       const res = await axios.get("http://localhost:8080/api/electricians");
-
       const activeElectricians = res.data.filter(
         (e) => e.status === "Active"
       );
-
       setElectricians(activeElectricians);
     } catch (err) {
       console.error("Error fetching electricians:", err);
@@ -34,77 +30,92 @@ function Electricians() {
   };
 
   return (
-    <section className="electricians-page">
-      <motion.h1
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-      >
-        Our Electricians
-      </motion.h1>
+    <div className="electricians-page">
 
-      {loading && <p className="loading-text">Loading electricians...</p>}
+      {/* HERO (Like About Us but different color) */}
+    <motion.section
+  className="electricians-hero"
+  initial={{ opacity: 0, y: 40 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{
+    duration: 0.8,
+    ease: "easeOut"
+  }}
+>
+  <motion.h1
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.2, duration: 0.6 }}
+  >
+    Our Electricians
+  </motion.h1>
 
-      {!loading && electricians.length === 0 && (
-        <p className="no-electricians">No electricians available</p>
-      )}
+  <motion.p
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.35, duration: 0.6 }}
+  >
+    Skilled, verified, and trusted electricians ready to serve you
+    with safe and reliable electrical solutions.
+  </motion.p>
+</motion.section>
 
-      <div className="electricians-grid">
-        {electricians.map((e, i) => (
-          <motion.div
-            className="electrician-card"
-            key={e._id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-          >
 
-            {/* IMAGE */}
-            <div className="electrician-image">
-              <img
-                src={e.image || DEFAULT_ELECTRICIAN_IMG}
-                alt={e.name}
-              />
-            </div>
+      {/* CONTENT */}
+      <section className="electricians-content">
+        {loading && <p className="loading-text">Loading electricians...</p>}
 
-            {/* INFO */}
-            <h3>{e.name}</h3>
+        {!loading && electricians.length === 0 && (
+          <p className="no-electricians">No electricians available</p>
+        )}
 
-            <p>
-              <strong>Experience:</strong>{" "}
-              {e.experience ? `${e.experience} Years` : "—"}
-            </p>
+        <div className="electricians-grid">
+          {electricians.map((e, i) => (
+            <motion.div
+              className="electrician-card"
+              key={e._id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -8 }}
+            >
+              {/* IMAGE */}
+              <div className="electrician-image">
+                <img
+                  src={e.image || DEFAULT_ELECTRICIAN_IMG}
+                  alt={e.name}
+                />
+              </div>
 
-            <p>
-              <strong>Expertise:</strong>{" "}
-              {e.specialization || "General Electrical"}
-            </p>
-            <p>
-              <strong>Location:</strong>{" "}
-              {e.area || "General Electrical"}
-            </p>
+              {/* INFO */}
+              <h3>{e.name}</h3>
 
-            <p className="phone"> Call : {e.phone}</p>
+              <p><strong>Experience:</strong> {e.experience ? `${e.experience} Years` : "—"}</p>
+              <p><strong>Expertise:</strong> {e.specialization || "General Electrical"}</p>
+              <p><strong>Location:</strong> {e.area || "—"}</p>
+              <p className="phone">📞 {e.phone}</p>
 
-            {/* ACTIONS */}
-            <div className="card-actions">
-              <a href={`tel:${e.phone}`} className="call-btn">
-                <FaPhoneAlt /> Call
-              </a>
+              {/* ACTIONS */}
+              <div className="card-actions">
+                <a href={`tel:${e.phone}`} className="call-btn">
+                  <FaPhoneAlt /> Call
+                </a>
 
-              <a
-                href={`https://wa.me/${e.phone.replace("+", "")}`}
-                target="_blank"
-                rel="noreferrer"
-                className="whatsapp-btn"
-              >
-                <FaWhatsapp /> WhatsApp
-              </a>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </section>
+                <a
+                  href={`https://wa.me/${e.phone.replace("+", "")}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="whatsapp-btn"
+                >
+                  <FaWhatsapp /> WhatsApp
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }
 
