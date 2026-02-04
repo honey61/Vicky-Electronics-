@@ -112,7 +112,6 @@ export default function Products() {
           >
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product) => {
-                console.log(product._id);
                 const image =
                   product.images?.length > 0
                     ? product.images[0]

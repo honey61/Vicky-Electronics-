@@ -102,12 +102,14 @@ function Electricians() {
                   <FaPhoneAlt /> Call
                 </a>
 
-                <a
-                  href={`https://wa.me/${e.phone.replace("+", "")}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="whatsapp-btn"
-                >
+               <a
+  href={`https://wa.me/${e.phone.replace("+", "")}?text=${encodeURIComponent(
+    `Hello ${e.name}, I found your contact on Vicky Electricians website.`
+  )}`}
+  target="_blank"
+  rel="noreferrer"
+  className="whatsapp-btn"
+>
                   <FaWhatsapp /> WhatsApp
                 </a>
               </div>

@@ -1,3 +1,4 @@
+
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -8,16 +9,25 @@ import "../../Styles/PagesStyle/ProductDetail.css";
 const DEFAULT_IMAGE =
   "https://www.crompton.co.in/cdn/shop/files/Storage_Water_Heater_07057b7d-8839-409e-87dd-336b1e7ef16c_600x.png";
 
-export default function ProductDetail() {
-   console.log("✅ ProductDetail page rendered");
+const WHATSAPP_NUMBER = "918126246330"; // your WhatsApp number
 
+export default function ProductDetail() {
   const { id } = useParams();
-  console.log("Product ID from URL:", id);
 
   const [product, setProduct] = useState(null);
   const [related, setRelated] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
+
+  const [showOrderPopup, setShowOrderPopup] = useState(false);
+  const [customer, setCustomer] = useState({
+    name: "",
+    phone: "",
+    address: "",
+    city: "",
+    state: "",
+    pincode: "",
+  });
 
   useEffect(() => {
     fetchProduct();
@@ -28,11 +38,10 @@ export default function ProductDetail() {
       const res = await axios.get(
         `https://vicky-ele-server-1.onrender.com/api/products/${id}`
       );
-
       setProduct(res.data);
       fetchRelated(res.data.type, res.data._id);
     } catch (err) {
-      console.error("❌ Failed to load product", err);
+      console.error("Failed to load product", err);
     } finally {
       setLoading(false);
     }
@@ -41,29 +50,54 @@ export default function ProductDetail() {
   const fetchRelated = async (type, productId) => {
     try {
       const res = await axios.get(
-        `https://vicky-ele-server-1.onrender.com/api/products`
+        "https://vicky-ele-server-1.onrender.com/api/products"
       );
-
       const filtered = res.data.filter(
         (p) => p.type === type && p._id !== productId
       );
-
-      setRelated(filtered.slice(0, 10));
+      setRelated(filtered.slice(0, 8));
     } catch (err) {
-      console.error("❌ Failed to load related products", err);
+      console.error("Failed to load related products", err);
     }
   };
 
   const increaseQty = () => setQuantity((q) => q + 1);
-  const decreaseQty = () =>
-    setQuantity((q) => (q > 1 ? q - 1 : 1));
+  const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
 
-  const handleAddToCart = () => {
-    console.log("🛒 Add to cart", product._id, quantity);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setCustomer((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleOrderNow = () => {
-    console.log("⚡ Order now", product._id, quantity);
+  const handlePlaceOrder = () => {
+    const message = `
+Hello Vicky Electronics 👋
+
+I would like to place an order.
+
+👤 Customer Name: ${customer.name}
+📞 Phone: ${customer.phone}
+
+📦 Product Details:
+• Product Name: ${product.name}
+• Model Number: ${product.modelName}
+• Quantity: ${quantity}
+
+📍 Delivery Address:
+${customer.address},
+City: ${customer.city}, State: ${customer.state}
+Pincode: ${customer.pincode}
+
+Please confirm availability and next steps.
+Thank you!
+`;
+
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+      message
+    )}`;
+
+    window.open(whatsappUrl, "_blank");
+    setShowOrderPopup(false);
   };
 
   if (loading) return <p className="loading">Loading...</p>;
@@ -74,32 +108,17 @@ export default function ProductDetail() {
       className="product-detail-page"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
     >
-      {/* AMAZON STYLE LAYOUT */}
+      {/* PRODUCT SECTION */}
       <div className="product-page">
-        {/* LEFT – IMAGE */}
-        <motion.div
-          className="left-column"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-        >
+        <div className="left-column">
           <img
-            src={
-              product.images?.length > 0
-                ? product.images[0]
-                : DEFAULT_IMAGE
-            }
+            src={product.images?.[0] || DEFAULT_IMAGE}
             alt={product.name}
           />
-        </motion.div>
+        </div>
 
-        {/* MIDDLE – INFO */}
-        <motion.div
-          className="middle-column"
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-        >
+        <div className="middle-column">
           <h1>{product.name}</h1>
           <p className="model">Model: {product.modelName}</p>
 
@@ -117,13 +136,8 @@ export default function ProductDetail() {
             <li><strong>Type:</strong> {product.type}</li>
           </ul>
 
-          <motion.div
-          className="right-column"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-        >
           <div className="quantity-row">
-            <span className="qty-label">Quantity</span>
+            <span>Quantity</span>
             <div className="quantity">
               <button onClick={decreaseQty}>−</button>
               <span>{quantity}</span>
@@ -132,26 +146,20 @@ export default function ProductDetail() {
           </div>
 
           <div className="buttons">
-            <button className="add-cart" onClick={handleAddToCart}>
-              Add to Cart
-            </button>
-
-            <button className="order-now" onClick={handleOrderNow}>
+            <button
+              className="order-now"
+              onClick={() => setShowOrderPopup(true)}
+            >
               Buy Now
             </button>
           </div>
-        </motion.div>
-        </motion.div>
-
-        {/* RIGHT – BUY BOX */}
-        
+        </div>
       </div>
 
       {/* RELATED PRODUCTS */}
       {related.length > 0 && (
         <div className="related-section">
           <h2>Similar Products</h2>
-
           <div className="related-grid">
             {related.map((item) => (
               <ProductCard
@@ -159,14 +167,41 @@ export default function ProductDetail() {
                 id={item._id}
                 title={item.name}
                 price={item.price}
-                image={
-                  item.images?.length > 0
-                    ? item.images[0]
-                    : DEFAULT_IMAGE
-                }
+                image={item.images?.[0] || DEFAULT_IMAGE}
               />
             ))}
           </div>
+        </div>
+      )}
+
+      {/* ORDER POPUP */}
+      {showOrderPopup && (
+        <div className="order-popup-overlay">
+          <motion.div
+            className="order-popup"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+          >
+            <h2>Delivery Details</h2>
+
+            <input name="name" placeholder="Full Name" onChange={handleInputChange} />
+            <input name="phone" placeholder="Phone Number" onChange={handleInputChange} />
+            <textarea name="address" placeholder="Full Address" onChange={handleInputChange} />
+
+            <div className="row">
+              <input name="city" placeholder="City" onChange={handleInputChange} />
+              <input name="state" placeholder="State" onChange={handleInputChange} />
+            </div>
+
+            <input name="pincode" placeholder="Pincode" onChange={handleInputChange} />
+
+            <div className="popup-actions">
+              <button onClick={() => setShowOrderPopup(false)}>Cancel</button>
+              <button className="place-order" onClick={handlePlaceOrder}>
+                Place Order on WhatsApp
+              </button>
+            </div>
+          </motion.div>
         </div>
       )}
     </motion.div>
