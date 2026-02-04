@@ -63,6 +63,21 @@ export default function ProductDetail() {
 
   const increaseQty = () => setQuantity((q) => q + 1);
   const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
+const handleAddToCart = () => {
+  const cartItem = {
+    productId: product._id,
+    name: product.name,
+    price: product.price,
+    image: product.images?.[0] || DEFAULT_IMAGE,
+    quantity,
+  };
+
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.push(cartItem);
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  alert("Added to cart 🛒");
+};
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -145,14 +160,18 @@ Thank you!
             </div>
           </div>
 
-          <div className="buttons">
-            <button
-              className="order-now"
-              onClick={() => setShowOrderPopup(true)}
-            >
-              Buy Now
-            </button>
-          </div>
+         <div className="buttons">
+  <button className="add-cart" onClick={handleAddToCart}>
+    Add to Cart
+  </button>
+
+  <button
+    className="order-now"
+    onClick={() => setShowOrderPopup(true)}
+  >
+    Buy Now
+  </button>
+</div>
         </div>
       </div>
 
