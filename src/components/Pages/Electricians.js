@@ -17,7 +17,7 @@ function Electricians() {
 
   const fetchElectricians = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/electricians");
+      const res = await axios.get("https://vicky-ele-server-1.onrender.com/api/electricians");
       const activeElectricians = res.data.filter(
         (e) => e.status === "Active"
       );
