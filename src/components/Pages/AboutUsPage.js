@@ -222,9 +222,9 @@ export default function AboutUsPage() {
 
         <div className="team-grid">
           {[
-            { name: "Vicky", role: "Founder" },
-            { name: "Anjali", role: "Lead Technician" },
-            { name: "Rohan", role: "Service Manager" }
+            { name: "Narendra Singh", role: "Founder" },
+            { name: "Simranjeet Singh", role: "Sales Executive" },
+            { name: "Harvidner Singh", role: "Service Manager" }
           ].map((member, index) => (
             <motion.div
               key={index}
