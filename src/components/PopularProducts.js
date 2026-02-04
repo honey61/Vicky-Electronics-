@@ -84,6 +84,7 @@ export default function PopularProducts() {
           return (
             <ProductCard
   key={product._id}
+    id={product._id}     
   title={product.name}
   description={product.description}
   price={product.price}

@@ -112,6 +112,7 @@ export default function Products() {
           >
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product) => {
+                console.log(product._id);
                 const image =
                   product.images?.length > 0
                     ? product.images[0]
@@ -119,6 +120,7 @@ export default function Products() {
 
                 return (
                   <ProductCard
+                    id={product._id} 
                     key={product._id}
                     title={product.name}
                     description={product.description}

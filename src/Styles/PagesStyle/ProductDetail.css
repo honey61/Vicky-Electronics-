@@ -1,0 +1,260 @@
+/* ===================== */
+/* PAGE */
+/* ===================== */
+.product-detail-page {
+  background: #fff;
+  padding: 20px 40px;
+  margin-top: 90px; /* ✅ FIX navbar overlap */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===================== */
+/* AMAZON GRID */
+/* ===================== */
+.product-page {
+  display: grid;
+  grid-template-columns: 420px 1fr 320px;
+  gap: 30px;
+  max-width: 1400px;
+  margin: auto;
+  align-items: start;
+}
+
+/* ===================== */
+/* LEFT COLUMN – IMAGE */
+/* ===================== */
+.left-column img {
+  width: 100%;
+  border: 1px solid #e7e7e7;
+  padding: 20px;
+  background: #fff;
+}
+
+/* ===================== */
+/* MIDDLE COLUMN – INFO */
+/* ===================== */
+.middle-column h1 {
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.model {
+  color: #565959;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 30px;
+  font-weight: bold;
+  color: #b12704;
+  margin: 10px 0;
+}
+
+.mrp {
+  text-decoration: line-through;
+  color: #565959;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.discount {
+  color: #04b524;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.desc {
+  margin: 15px 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.meta {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+  border-top: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.meta li {
+  padding: 8px 0;
+  font-size: 14px;
+  display: flex;
+}
+
+.meta li strong {
+  width: 130px;
+  color: #565959;
+}
+
+/* ===================== */
+/* RIGHT COLUMN – BUY BOX */
+/* ===================== */
+.right-column {
+  border: 1px solid #ddd;
+  padding: 20px;
+  background: #fff;
+  width: 100%;
+}
+
+/* Quantity row */
+.quantity-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.qty-label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Quantity control */
+.quantity {
+  display: flex;
+  align-items: center;
+  border: 1px solid #a6a6a6;
+}
+
+.quantity button {
+  width: 36px;
+  height: 36px;
+  background: #f0f2f2;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.quantity span {
+  width: 42px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.add-cart {
+  background: #ffd814;
+  border: 1px solid #fcd200;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-cart:hover {
+  background: #f7ca00;
+}
+
+.order-now {
+  background: #ffa41c;
+  border: 1px solid #ff8f00;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.order-now:hover {
+  background: #fa8900;
+}
+
+/* ===================== */
+/* DESKTOP & TABLET FIX */
+/* Order section BELOW details */
+/* ===================== */
+@media (min-width: 769px) {
+  .product-page {
+    grid-template-columns: 420px 1fr;
+  }
+
+  .right-column {
+    grid-column: 2;
+    margin-top: 25px;
+    max-width: 380px;
+  }
+}
+
+/* ===================== */
+/* RELATED PRODUCTS */
+/* ===================== */
+.related-section {
+  max-width: 1400px;
+  margin: 60px auto 0;
+}
+
+.related-grid {
+    margin: 20px;
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.related-grid::-webkit-scrollbar {
+  height: 6px;
+}
+
+.related-grid::-webkit-scrollbar-thumb {
+  background: #ccc;
+}
+
+/* ===================== */
+/* 📱 MOBILE – FIXED BOTTOM BUY BAR */
+/* ===================== */
+@media (max-width: 768px) {
+  .product-detail-page {
+    padding: 20px;
+    padding-bottom: 160px; /* ✅ prevents overlap with cards */
+  }
+
+  .product-page {
+    grid-template-columns: 1fr;
+  }
+
+  /* FIXED BOTTOM BAR */
+  .right-column {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.15);
+    z-index: 999;
+    padding: 12px 14px;
+  }
+
+  /* Quantity MUST be visible */
+  .quantity-row {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  /* Buttons side-by-side */
+  .buttons {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .add-cart,
+  .order-now {
+    flex: 1;
+    padding: 16px 0;
+    font-size: 16px;
+    border-radius: 6px;
+  }
+
+  /* Related products – 2 visible */
+  .related-grid > * {
+   flex: 0 0 60%;
+  }
+}

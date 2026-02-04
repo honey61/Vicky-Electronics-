@@ -10,19 +10,20 @@ import Electricians from "./components/Pages/Electricians";
 import Products from "./components/Pages/Products";
 import ScrollToTop from "./components/ScrollToTop";
 import Chatbot from "./components/Pages/Chatbot";
+import ProductDetail from "./components/Pages/ProductDetail";
 function App() {
   return (
     <Router>
        <ScrollToTop />
         <Chatbot />
       <Navbar />
-
       <Routes>
         <Route path="/Vicky-Electronics-" element={<HomePage />} />
         <Route path="/contact" element={<ContactOsome />} />
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/electricians" element={<Electricians />} />
            <Route path="/product" element={<Products />} />
+           <Route path="/product/:id" element={<ProductDetail />} />
       </Routes>
 
       <Footer />
