@@ -1,25 +1,43 @@
 import "../Styles/AuthorizedBrands.css";
 import { motion } from "framer-motion";
+import polycab from "../assests/images/BrandLogos/PolycabLogo.jpg";
+import havells from "../assests/images/BrandLogos/HavellsLogo.jpg";
+import crompton from "../assests/images/BrandLogos/CromptonLogo.png";
+import kei from "../assests/images/BrandLogos/KeiLogo.png"; 
+import kirloskar from "../assests/images/BrandLogos/KirloskarLogo.jpg";
+import vguard from "../assests/images/BrandLogos/VguardLogo.png";
+import orient from "../assests/images/BrandLogos/OrientLogo.png";
+import venus from "../assests/images/BrandLogos/VenusLogo.png";
+import cona from "../assests/images/BrandLogos/ConaLogo.jpg";   
+
 
 const row1 = [
-  { name: "Polycab", img: "../../images/BrandLogos/PolycabLogo.jpg", offset: -6 },
-  { name: "Havells", img: "../../images/BrandLogos/HavellsLogo.jpg", offset: 8 },
-  { name: "Crompton", img: "../../images/BrandLogos/CromptonLogo.png", offset: -4 },
-  { name: "KEI", img: "../../images/BrandLogos/KeiLogo.png", offset: 10 }
+  { name: "Polycab", img: polycab, offset: -6 },
+  { name: "Havells", img: havells, offset: 8 },
+  { name: "Crompton", img: crompton, offset: -4 },
+  { name: "KEI", img: kei, offset: 10 },
+    { name: "V-Guard", img: vguard, offset: -8 },
+  { name: "Orient", img: orient, offset: 10 },
 ];
 
 const row2 = [
-  { name: "Kirloskar", img: "../../images/BrandLogos/KirloskarLogo.jpg", offset: 6 },
-  { name: "V-Guard", img: "../../images/BrandLogos/VguardLogo.png", offset: -8 },
-  { name: "Orient", img: "../../images/BrandLogos/OrinetLogo.png", offset: 10 },
-  { name: "Venus", img: "../../images/BrandLogos/VenusLogo.png", offset: -6 }
+  { name: "Kirloskar", img: kirloskar, offset: 6 },
+  { name: "V-Guard", img: vguard, offset: -8 },
+  { name: "Orient", img: orient, offset: 10 },
+  { name: "Venus", img: venus, offset: -6 },
+   { name: "Cona", img: cona, offset: -10 },
+  { name: "Polycab", img: polycab, offset: 6 },
+  { name: "Havells", img: havells, offset: -4 },
 ];
 
 const row3 = [
-  { name: "Cona", img: "../../images/BrandLogos/ConaLogo.jpg", offset: -10 },
-  { name: "Polycab", img: "/brands/polycab.png", offset: 6 },
-  { name: "Havells", img: "/brands/havells.png", offset: -4 },
-  { name: "Crompton", img: "/brands/crompton.png", offset: 8 }
+    { name: "V-Guard", img: vguard, offset: -8 },
+  { name: "Orient", img: orient, offset: 10 },
+
+  { name: "Havells", img: havells, offset: -4 },
+  { name: "Crompton", img: crompton, offset: 8 },
+    { name: "Cona", img: cona, offset: -10 },
+  { name: "Polycab", img: polycab, offset: 6 },
 ];
 
 function BrandRow({ brands, duration }) {
