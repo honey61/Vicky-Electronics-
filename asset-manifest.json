@@ -1,14 +1,21 @@
 {
   "files": {
     "main.css": "/Vicky-Electronics-/static/css/main.c2e557df.css",
-    "main.js": "/Vicky-Electronics-/static/js/main.6ebd40fd.js",
+    "main.js": "/Vicky-Electronics-/static/js/main.fed8f65b.js",
+    "static/media/KirloskarLogo.jpg": "/Vicky-Electronics-/static/media/KirloskarLogo.5be0a5d664bd699e4e74.jpg",
     "static/media/bgimage.avif": "/Vicky-Electronics-/static/media/bgimage.6637c85e39593ebf5211.avif",
+    "static/media/HavellsLogo.jpg": "/Vicky-Electronics-/static/media/HavellsLogo.618d01215d120b4e181b.jpg",
+    "static/media/ConaLogo.jpg": "/Vicky-Electronics-/static/media/ConaLogo.18492f721d482172ee1d.jpg",
+    "static/media/VguardLogo.png": "/Vicky-Electronics-/static/media/VguardLogo.e63c4a1de79545db5d4c.png",
+    "static/media/PolycabLogo.jpg": "/Vicky-Electronics-/static/media/PolycabLogo.f0229f27b23873cc98e5.jpg",
+    "static/media/KeiLogo.png": "/Vicky-Electronics-/static/media/KeiLogo.079c41a4c18036c65f10.png",
+    "static/media/OrientLogo.png": "/Vicky-Electronics-/static/media/OrientLogo.b47957a74ff631ea7c91.png",
     "index.html": "/Vicky-Electronics-/index.html",
     "main.c2e557df.css.map": "/Vicky-Electronics-/static/css/main.c2e557df.css.map",
-    "main.6ebd40fd.js.map": "/Vicky-Electronics-/static/js/main.6ebd40fd.js.map"
+    "main.fed8f65b.js.map": "/Vicky-Electronics-/static/js/main.fed8f65b.js.map"
   },
   "entrypoints": [
     "static/css/main.c2e557df.css",
-    "static/js/main.6ebd40fd.js"
+    "static/js/main.fed8f65b.js"
   ]
 }
