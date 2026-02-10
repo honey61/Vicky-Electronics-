@@ -32,11 +32,6 @@ const fadeUp = {
   visible: { opacity: 1, y: 0 }
 };
 
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 }
-};
-
 export default function AboutUsPage() {
   return (
     <div className="about-page">
@@ -136,10 +131,10 @@ export default function AboutUsPage() {
       >
         <h2>Why Choose Us</h2>
         <ul>
-          <li>✔ Trusted local store with years of experience</li>
-          <li>✔ Genuine products & fair pricing</li>
-          <li>✔ Skilled technicians & fast service</li>
-          <li>✔ Customer-first approach</li>
+          <li>Trusted local store with years of experience</li>
+          <li>Genuine products & fair pricing</li>
+          <li>Skilled technicians & fast service</li>
+          <li>Customer-first approach</li>
         </ul>
       </motion.section>
 

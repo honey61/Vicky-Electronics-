@@ -37,9 +37,9 @@ export default function PopularProducts() {
   const fetchPopularProducts = async () => {
     try {
       const res = await axios.get("https://vicky-ele-server-1.onrender.com/api/products");
-
+console.log("Fetched products:", res.data);
       const popularProducts = res.data.filter(
-        (p) => p.type?.toLowerCase() === "popular"
+        (p) => p.isPopular === true
       );
 
       setProducts(popularProducts);

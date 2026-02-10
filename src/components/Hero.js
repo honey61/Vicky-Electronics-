@@ -25,7 +25,7 @@ function Hero() {
   </a>
 
   <div className="social-line"></div>
-  <span className="lang">EN / FR</span>
+  <span className="lang">EN</span>
 </motion.div>
 
 
