@@ -9,20 +9,34 @@ const DEFAULT_IMAGE =
 
 const PRODUCTS_PER_PAGE = 16;
 
+const rankPriority = {
+  "Most Recommended": 1,
+  "Recommended": 2,
+  "Average": 3,
+  "Less Recommended": 4,
+};
+
 export default function Products() {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
-  /* ================= FETCH PRODUCTS ================= */
+  /* ================= INITIAL LOAD ================= */
+
   useEffect(() => {
-    fetchProducts();
+    fetchCategories();
+    fetchAllProducts();
   }, []);
 
-  const fetchProducts = async () => {
+  const fetchAllProducts = async () => {
     try {
+      setLoading(true);
       const res = await axios.get(
         "https://vicky-ele-server-1.onrender.com/api/products"
       );
@@ -34,12 +48,49 @@ export default function Products() {
     }
   };
 
-  /* Reset page when search or sort changes */
+  const fetchCategories = async () => {
+    try {
+      const res = await axios.get(
+        "https://vicky-ele-server-1.onrender.com/api/categories"
+      );
+      setCategories(res.data);
+    } catch (err) {
+      console.error("❌ Failed to fetch categories", err);
+    }
+  };
+
+  /* ================= FETCH BY CATEGORY ================= */
+
+  useEffect(() => {
+    if (selectedCategory === "all") {
+      fetchAllProducts();
+      return;
+    }
+
+    const fetchByCategory = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(
+          `https://vicky-ele-server-1.onrender.com/api/products/category/${selectedCategory}`
+        );
+        setProducts(res.data);
+      } catch (err) {
+        console.error("❌ Failed to fetch category products", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchByCategory();
+  }, [selectedCategory]);
+
+  /* Reset page when filters change */
   useEffect(() => {
     setCurrentPage(1);
-  }, [search, sort]);
+  }, [search, sort, selectedCategory]);
 
-  /* ================= FILTER + SORT ================= */
+  /* ================= SEARCH + AUTO RANK ================= */
+
   const filteredProducts = useMemo(() => {
     let list = [...products];
 
@@ -49,6 +100,13 @@ export default function Products() {
       );
     }
 
+    // Rank sorting
+    list.sort((a, b) => {
+      const rankA = rankPriority[a.rank] ?? 999;
+      const rankB = rankPriority[b.rank] ?? 999;
+      return rankA - rankB;
+    });
+
     if (sort === "low-high") list.sort((a, b) => a.price - b.price);
     if (sort === "high-low") list.sort((a, b) => b.price - a.price);
 
@@ -56,6 +114,7 @@ export default function Products() {
   }, [products, search, sort]);
 
   /* ================= PAGINATION ================= */
+
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
 
   const paginatedProducts = useMemo(() => {
@@ -66,34 +125,20 @@ export default function Products() {
 
   return (
     <div className="products-page">
-      {/* ================= HERO ================= */}
       <motion.section
         className="products-hero"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 0.8 }}
       >
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-        >
-          Our Products
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35, duration: 0.6 }}
-        >
+        <h1>Our Products</h1>
+        <p>
           Quality electrical products with trusted brands, fair pricing, and
           reliable performance.
-        </motion.p>
+        </p>
       </motion.section>
 
-      {/* ================= CONTENT ================= */}
       <section className="products-content">
-        {/* FILTER BAR */}
         <div className="filter-bar">
           <input
             type="text"
@@ -102,6 +147,18 @@ export default function Products() {
             onChange={(e) => setSearch(e.target.value)}
           />
 
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option value="all">All Categories</option>
+            {categories.map((cat) => (
+              <option key={cat._id} value={cat.name}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
+
           <select value={sort} onChange={(e) => setSort(e.target.value)}>
             <option value="">Sort by</option>
             <option value="low-high">Price: Low to High</option>
@@ -109,16 +166,11 @@ export default function Products() {
           </select>
         </div>
 
-        {/* STATES */}
         {loading && <p className="no-result">Loading products...</p>}
 
         {!loading && (
           <>
-            <motion.div
-              className="products-grid"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-            >
+            <motion.div className="products-grid">
               {paginatedProducts.length > 0 ? (
                 paginatedProducts.map((product) => {
                   const image =
@@ -135,9 +187,6 @@ export default function Products() {
                       price={product.price}
                       mrp={product.mrp}
                       discount={product.discount}
-                      unit="unit"
-                      rating={product.rating || "4.5"}
-                      reviews={product.reviews || "0"}
                       image={image}
                     />
                   );
@@ -147,7 +196,6 @@ export default function Products() {
               )}
             </motion.div>
 
-            {/* ================= PAGINATION UI ================= */}
             {totalPages > 1 && (
               <div className="pagination">
                 <button
