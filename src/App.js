@@ -11,22 +11,27 @@ import Products from "./components/Pages/Products";
 import ScrollToTop from "./components/ScrollToTop";
 import Chatbot from "./components/Pages/Chatbot";
 import ProductDetail from "./components/Pages/ProductDetail";
+import Cart from "./components/Pages/Cart";
 function App() {
   return (
     <Router>
-       <ScrollToTop />
+      <div className="app-shell">
+        <ScrollToTop />
         <Chatbot />
-      <Navbar />
-      <Routes>
-        <Route path="/Vicky-Electronics-" element={<HomePage />} />
-        <Route path="/contact" element={<ContactOsome />} />
-        <Route path="/about" element={<AboutUsPage />} />
-        <Route path="/electricians" element={<Electricians />} />
-           <Route path="/product" element={<Products />} />
-           <Route path="/product/:id" element={<ProductDetail />} />
-      </Routes>
-
-      <Footer />
+        <Navbar />
+        <main className="app-main">
+          <Routes>
+            <Route path="/Vicky-Electronics-" element={<HomePage />} />
+            <Route path="/contact" element={<ContactOsome />} />
+            <Route path="/about" element={<AboutUsPage />} />
+            <Route path="/electricians" element={<Electricians />} />
+            <Route path="/product" element={<Products />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/cart" element={<Cart />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
   );
 }

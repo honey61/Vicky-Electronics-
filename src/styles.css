@@ -1,4 +1,24 @@
-body{margin:0;font-family:Segoe UI;}
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Segoe UI, Arial, sans-serif;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
+}
+
 .navbar{display:flex;justify-content:space-between;padding:20px;position:absolute;width:100%;}
 .hero{height:100vh;background:#ddd;display:flex;align-items:center;padding:40px;}
 

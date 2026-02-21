@@ -11,6 +11,13 @@ const DEFAULT_IMAGE =
 
 const WHATSAPP_NUMBER = "918126246330"; // your WhatsApp number
 
+const decodeHtmlEntities = (html = "") => {
+  if (typeof window === "undefined") return html;
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+};
+
 export default function ProductDetail() {
   const { id } = useParams();
 
@@ -72,9 +79,25 @@ const handleAddToCart = () => {
     quantity,
   };
 
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push(cartItem);
+  let cart = [];
+  try {
+    const parsed = JSON.parse(localStorage.getItem("cart") || "[]");
+    cart = Array.isArray(parsed) ? parsed : [];
+  } catch {
+    cart = [];
+  }
+
+  const existingIndex = cart.findIndex((item) => item.productId === product._id);
+
+  if (existingIndex >= 0) {
+    cart[existingIndex].quantity =
+      Number(cart[existingIndex].quantity || 1) + Number(quantity || 1);
+  } else {
+    cart.push(cartItem);
+  }
+
   localStorage.setItem("cart", JSON.stringify(cart));
+  window.dispatchEvent(new Event("cartUpdated"));
 
   alert("Added to cart 🛒");
 };
@@ -117,6 +140,11 @@ Thank you!
 
   if (loading) return <p className="loading">Loading...</p>;
   if (!product) return <p>Product not found</p>;
+  const rawDetailDescription =
+    product.detailDescription || product.detaildescription || "";
+  const detailDescriptionHtml = decodeHtmlEntities(
+    String(rawDetailDescription).trim()
+  );
 
   return (
     <motion.div
@@ -146,10 +174,20 @@ Thank you!
           <p className="desc">{product.description}</p>
 
           <ul className="meta">
-            <li><strong>Capacity:</strong> {product.capacity}</li>
-            <li><strong>Warranty:</strong> {product.warranty} Months</li>
-            <li><strong>Type:</strong> {product.type}</li>
+            <li><strong>Capacity:</strong> {product.capacity || "N/A"}</li>
+            <li><strong>Warranty:</strong> {product.warranty || "N/A"}</li>
+            <li><strong>Type:</strong> {product.type || "N/A"}</li>
           </ul>
+
+          {detailDescriptionHtml && (
+            <section className="detail-description-section">
+              <h2>Detailed Description</h2>
+              <div
+                className="detail-description-content"
+                dangerouslySetInnerHTML={{ __html: detailDescriptionHtml }}
+              />
+            </section>
+          )}
 
           <div className="quantity-row">
             <span>Quantity</span>

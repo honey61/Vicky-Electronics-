@@ -86,6 +86,19 @@ function Navbar() {
 
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+
+  const readCartCount = () => {
+    try {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const count = Array.isArray(cart)
+        ? cart.reduce((sum, item) => sum + Number(item.quantity || 1), 0)
+        : 0;
+      setCartCount(count);
+    } catch {
+      setCartCount(0);
+    }
+  };
 
   const handleNav = (path) => {
     navigate(path);
@@ -100,6 +113,17 @@ function Navbar() {
 
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    readCartCount();
+    window.addEventListener("cartUpdated", readCartCount);
+    window.addEventListener("storage", readCartCount);
+
+    return () => {
+      window.removeEventListener("cartUpdated", readCartCount);
+      window.removeEventListener("storage", readCartCount);
+    };
   }, []);
 
   return (
@@ -130,6 +154,9 @@ function Navbar() {
           <li onClick={() => navigate("/about")}>About</li>
           <li onClick={() => navigate("/electricians")}>Electricians</li>
           <li onClick={() => navigate("/contact")}>Contact</li>
+          <li onClick={() => handleNav("/cart")} className="cart-nav-item">
+            Cart {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+          </li>
         </ul>
 
         {/* HAMBURGER */}
@@ -162,6 +189,9 @@ function Navbar() {
         <li onClick={() => handleNav("/about")}>About</li>
         <li onClick={() => handleNav("/electricians")}>Electricians</li>
         <li onClick={() => handleNav("/contact")}>Contact</li>
+        <li onClick={() => handleNav("/cart")}>
+          Cart {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+        </li>
       </ul>
     </motion.div>
   )}

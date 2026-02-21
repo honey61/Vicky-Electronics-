@@ -55,6 +55,25 @@
   letter-spacing: 1px;
 }
 
+.cart-nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cart-badge {
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 11px;
+  line-height: 20px;
+  text-align: center;
+  padding: 0 6px;
+  font-weight: 700;
+}
+
 /* HAMBURGER */
 .hamburger {
   display: none;
@@ -138,4 +157,9 @@
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 2px;
+}
+
+.mobile-menu .cart-badge {
+  vertical-align: middle;
+  margin-left: 8px;
 }
