@@ -1,6 +1,6 @@
 
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import ProductCard from "../../components/ProductCard";
@@ -36,25 +36,7 @@ export default function ProductDetail() {
     pincode: "",
   });
 
-  useEffect(() => {
-    fetchProduct();
-  }, [id]);
-
-  const fetchProduct = async () => {
-    try {
-      const res = await axios.get(
-        `https://vicky-ele-server-1.onrender.com/api/products/${id}`
-      );
-      setProduct(res.data);
-      fetchRelated(res.data.type, res.data._id);
-    } catch (err) {
-      console.error("Failed to load product", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchRelated = async (type, productId) => {
+  const fetchRelated = useCallback(async (type, productId) => {
     try {
       const res = await axios.get(
         "https://vicky-ele-server-1.onrender.com/api/products"
@@ -66,7 +48,25 @@ export default function ProductDetail() {
     } catch (err) {
       console.error("Failed to load related products", err);
     }
-  };
+  }, []);
+
+  const fetchProduct = useCallback(async () => {
+    try {
+      const res = await axios.get(
+        `https://vicky-ele-server-1.onrender.com/api/products/${id}`
+      );
+      setProduct(res.data);
+      fetchRelated(res.data.type, res.data._id);
+    } catch (err) {
+      console.error("Failed to load product", err);
+    } finally {
+      setLoading(false);
+    }
+  }, [fetchRelated, id]);
+
+  useEffect(() => {
+    fetchProduct();
+  }, [fetchProduct]);
 
   const increaseQty = () => setQuantity((q) => q + 1);
   const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
