@@ -55,8 +55,8 @@ export default function Contact() {
 
           <motion.div className="form-row" variants={fadeUp}>
             <div className="phone-input">
-              <span>🇮🇹</span>
-              <input placeholder="+39 999 999999" />
+              <span>IN</span>
+              <input placeholder="+91 999 999999" />
             </div>
           </motion.div>
 

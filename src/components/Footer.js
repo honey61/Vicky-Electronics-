@@ -2,6 +2,7 @@ import "../Styles/Footer.css";
 import { motion } from "framer-motion";
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 import { MdLocationOn, MdPhone, MdEmail } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 /* Animation variants */
 const fadeUp = {
@@ -21,6 +22,8 @@ const stagger = {
 };
 
 function Footer() {
+  const navigate = useNavigate();
+
   return (
     <motion.footer
       className="footer"
@@ -29,16 +32,14 @@ function Footer() {
       viewport={{ once: true }}
     >
       <div className="footer-container">
-
         {/* TOP SECTION */}
         <motion.div className="footer-top" variants={stagger}>
-
           {/* BRAND */}
           <motion.div className="footer-brand" variants={fadeUp}>
             <h3>Vicky Electronics</h3>
             <p>
-              Trusted supplier of electrical & electronic products,
-              delivering quality and reliability for homes and businesses.
+              Trusted supplier of electrical & electronic products, delivering
+              quality and reliability for homes and businesses.
             </p>
 
             <div className="footer-socials">
@@ -53,10 +54,10 @@ function Footer() {
           <motion.div className="footer-links" variants={fadeUp}>
             <h4>Quick Links</h4>
             <ul>
-              <li>Home</li>
-              <li>Products</li>
-              <li>About Us</li>
-              <li>Contact</li>
+              <li onClick={() => navigate("/Vicky-Electronics-")}>Home</li>
+              <li onClick={() => navigate("/product")}>Products</li>
+              <li onClick={() => navigate("/about")}>About Us</li>
+              <li onClick={() => navigate("/contact")}>Contact</li>
             </ul>
           </motion.div>
 
@@ -65,7 +66,8 @@ function Footer() {
             <h4>Our Location</h4>
             <p>
               <MdLocationOn />
-              Rishikesh Road, Doiwala Chowk,<br />
+              Rishikesh Road, Doiwala Chowk,
+              <br />
               Dehradun, India
             </p>
 
@@ -75,10 +77,9 @@ function Footer() {
               rel="noopener noreferrer"
               className="map-btn"
             >
-              View on Map →
+              View on Map ->
             </a>
           </motion.div>
-
         </motion.div>
 
         {/* HELP BAR */}
@@ -103,9 +104,9 @@ function Footer() {
 
         {/* BOTTOM */}
         <motion.div className="footer-bottom" variants={fadeUp}>
-          © {new Date().getFullYear()} Vicky Electronics. All rights reserved.
+          Copyright {new Date().getFullYear()} Vicky Electronics. All rights
+          reserved.
         </motion.div>
-
       </div>
     </motion.footer>
   );
