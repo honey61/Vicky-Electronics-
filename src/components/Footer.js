@@ -77,7 +77,7 @@ function Footer() {
               rel="noopener noreferrer"
               className="map-btn"
             >
-              View on Map ->
+
             </a>
           </motion.div>
         </motion.div>
